@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Ghani | Dashboard')
+@section('title','Ghani | About')
 @section('container')
 <div class="main-content">
                 <div class="section__content section__content--p30">
@@ -7,7 +7,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">Data Contact Us</h2>
+                                    <h2 class="title-1">Data About Me</h2>
+                                    <a href="{{route('about.create')}}" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-plus fa-sm"></i> Tambah
+                                    </a> 
                                 </div>
                             </div>
                         </div>
@@ -19,31 +22,38 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Email</th>
-                                                <th>Pesan</th>
-                                                <th>Aksi</th>
+                                                <th>Projek Selesai</th>
+                                                <th>Client Senang</th>
+                                                <th>Review Positif</th>
+                                                <th>Skill HTML</th>
+                                                <th>Skill CSS</th>
+                                                <th>Skill Javascript</th>
+                                                <th>Skill PHP</th>
+                                                <th style="width: 15%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($contacts as $index => $contact)
+                                            @foreach ($about as $index => $abt)
                                             
                                             <tr>
                                                 <td>{{$index + 1}}</td>
-                                                <td>{{$contact->nama}}</td>
-                                                <td>{{$contact->email}}</td>
-                                                <td>{{$contact->pesan}}</td>
+                                                <td>{{$abt->projek_selesai}}</td>
+                                                <td>{{$abt->client_senang}}</td>
+                                                <td>{{$abt->review_positif}}</td>
+                                                <td>{{$abt->skill_html}}</td>
+                                                <td>{{$abt->skill_css}}</td>
+                                                <td>{{$abt->skill_javascript}}</td>
+                                                <td>{{$abt->skill_php}}</td>
                                                 <td>
-                                                    <a href="{{route('contacts.edit', $contact->id)}}"><i class="fas fa-edit"></i></a>
+                                                    <a href="{{route('about.edit', $abt->id)}}"><i class="fas fa-edit"></i></a>
                                                     |
-                                                    <a href="{{route('contacts.destroy', $contact->id)}}"><i class="fas fa-trash" style="color : red"></i></a>
+                                                    <a href="{{route('about.destroy', $abt->id)}}"><i class="fas fa-trash" style="color : red"></i></a>
                                                 </td>
                                             </tr>
 
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    {{$contacts->links()}}
                                 </div>
                                 <!-- END DATA TABLE-->
                             </div>

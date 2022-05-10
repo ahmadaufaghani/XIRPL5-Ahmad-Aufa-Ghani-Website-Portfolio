@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Contact;
+use App\Models\About;
 
-class ContactController extends Controller
+class AboutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::paginate(2);
-       return view('admin/contacts/index',compact('contacts'));
+        $about = About::all();
+        return view('admin.about.about',[
+            'title'=>'About'
+        ], compact('about'));
     }
 
     /**
@@ -25,7 +27,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-       //
+        return view('admin.about.create');
     }
 
     /**
@@ -36,11 +38,10 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $contact = Contact::create($request->all());
-        $contact->save();
+        $tmbh_data_about = About::create($request->all());
+        $tmbh_data_about->save();
 
-        return redirect()->route('home.index');
+        return redirect()->route('about.index');
     }
 
     /**
@@ -51,7 +52,7 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        //
+       //
     }
 
     /**
@@ -62,8 +63,10 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        $contact = Contact::findOrFail($id);
-       return view('admin/contacts/edit',compact('contact'));
+        $form_update_data_about = About::findOrFail($id);
+        return view('admin.about.update',[
+            'title'=>'Update Data About'
+        ], compact('form_update_data_about'));
     }
 
     /**
@@ -75,11 +78,11 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $contact = Contact::findOrFail($id);
-        $contact->update($request->all());
-        $contact->save();
-        
-        return redirect()->route('contacts.index');
+        $update_data_about = About::findOrFail($id);
+        $update_data_about->update($request->all());
+        $update_data_about->save();
+
+        return redirect()->route('about.index');
     }
 
     /**
@@ -90,9 +93,8 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        $contact = Contact::findOrFail($id);
-        $contact->delete();
-        
-        return redirect()->route('contacts.index');
+        $update_delete_about = About::findOrFail($id);
+        $update_delete_about->delete();
+        return redirect()->route('about.index');
     }
 }

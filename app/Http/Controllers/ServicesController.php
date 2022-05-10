@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Contact;
+use App\Models\Services;
 
-class ContactController extends Controller
+class ServicesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::paginate(2);
-       return view('admin/contacts/index',compact('contacts'));
+        $services = Services::all();
+        return view('admin.services.services',[
+            'title'=>'Data Services'
+        ], compact('services'));
     }
 
     /**
@@ -25,7 +27,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-       //
+        return view('admin.services.create_services');
     }
 
     /**
@@ -36,11 +38,9 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $contact = Contact::create($request->all());
-        $contact->save();
-
-        return redirect()->route('home.index');
+        $services_create = Services::create($request->all());
+        $services_create->save();
+        return redirect()->route('services.index');
     }
 
     /**
@@ -62,8 +62,8 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        $contact = Contact::findOrFail($id);
-       return view('admin/contacts/edit',compact('contact'));
+        $tampilan_update_services = Services::findOrFail($id);
+        return view('admin.services.update_services', compact('tampilan_update_services'));
     }
 
     /**
@@ -75,11 +75,11 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $contact = Contact::findOrFail($id);
-        $contact->update($request->all());
-        $contact->save();
-        
-        return redirect()->route('contacts.index');
+        $update_services = Services::findOrFail($id);
+        $update_services->update($request->all());
+        $update_services->save();
+
+        return redirect()->route('services.index');
     }
 
     /**
@@ -90,9 +90,9 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        $contact = Contact::findOrFail($id);
-        $contact->delete();
-        
-        return redirect()->route('contacts.index');
+        $delete_services = Services::findOrFail($id);
+        $delete_services->delete();
+
+        return redirect()->route('services.index');
     }
 }

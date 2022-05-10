@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Ghani | Dashboard')
+@section('title','Ghani | Services')
 @section('container')
 <div class="main-content">
                 <div class="section__content section__content--p30">
@@ -7,7 +7,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">Data Contact Us</h2>
+                                    <h2 class="title-1">Data Services</h2>
+                                    <a href="{{route('services.create')}}" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-plus fa-sm"></i> Tambah
+                                    </a> 
                                 </div>
                             </div>
                         </div>
@@ -19,31 +22,26 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Email</th>
-                                                <th>Pesan</th>
+                                                <th>Ikon</th>
+                                                <th>Pekerjaan</th>
+                                                <th>Deskripsi Pekerjaan</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
+                                        @foreach($services as $index => $srvs)
                                         <tbody>
-                                            @foreach ($contacts as $index => $contact)
-                                            
-                                            <tr>
-                                                <td>{{$index + 1}}</td>
-                                                <td>{{$contact->nama}}</td>
-                                                <td>{{$contact->email}}</td>
-                                                <td>{{$contact->pesan}}</td>
-                                                <td>
-                                                    <a href="{{route('contacts.edit', $contact->id)}}"><i class="fas fa-edit"></i></a>
+                                            <td>{{$index+1}}</td>
+                                            <td><i class="fa fa-{{$srvs->ikon}}"></i></td>
+                                            <td>{{$srvs->pekerjaan}}</td>
+                                            <td>{{$srvs->desc_pekerjaan}}</td>
+                                            <td style="width: 15%">
+                                                <a href="{{route('services.edit', $srvs->id)}}"><i class="fas fa-edit"></i></a>
                                                     |
-                                                    <a href="{{route('contacts.destroy', $contact->id)}}"><i class="fas fa-trash" style="color : red"></i></a>
-                                                </td>
-                                            </tr>
-
-                                            @endforeach
+                                                <a href="{{route('services.destroy', $srvs->id)}}"><i class="fas fa-trash" style="color : red"></i></a>
+                                            </td>
                                         </tbody>
+                                        @endforeach
                                     </table>
-                                    {{$contacts->links()}}
                                 </div>
                                 <!-- END DATA TABLE-->
                             </div>

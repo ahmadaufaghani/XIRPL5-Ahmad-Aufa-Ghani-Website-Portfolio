@@ -7,7 +7,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">Data Contact Us</h2>
+                                    <h2 class="title-1">Data Portfolio</h2>
+                                    <a href="{{route('portfolio.create')}}" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-plus fa-sm"></i> Tambah
+                                    </a> 
                                 </div>
                             </div>
                         </div>
@@ -20,30 +23,32 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama</th>
-                                                <th>Email</th>
-                                                <th>Pesan</th>
+                                                <th>Deskripsi</th>
+                                                <th>Gambar</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($contacts as $index => $contact)
                                             
+                                            @foreach ($portfolio as $index => $prtf)
                                             <tr>
                                                 <td>{{$index + 1}}</td>
-                                                <td>{{$contact->nama}}</td>
-                                                <td>{{$contact->email}}</td>
-                                                <td>{{$contact->pesan}}</td>
+                                                <td>{{$prtf->nama}}</td>
+                                                <td>{{$prtf->deskripsi}}</td>
                                                 <td>
-                                                    <a href="{{route('contacts.edit', $contact->id)}}"><i class="fas fa-edit"></i></a>
+                                                    <img src="{{asset('admin/images/portfolio/'. $prtf->gambar)}}" alt="{{$prtf->gambar}}" width="250px">
+                                                </td>
+                                                <td>
+                                                    <a href="{{route('portfolio.edit', $prtf->id)}}"><i class="fas fa-edit"></i></a>
                                                     |
-                                                    <a href="{{route('contacts.destroy', $contact->id)}}"><i class="fas fa-trash" style="color : red"></i></a>
+                                                    <a href="{{route('portfolio.destroy', $prtf->id)}}"><i class="fas fa-trash" style="color : red"></i></a>
                                                 </td>
                                             </tr>
-
                                             @endforeach
+                                            
                                         </tbody>
                                     </table>
-                                    {{$contacts->links()}}
+                                    {{-- {{$contacts->links()}} --}}
                                 </div>
                                 <!-- END DATA TABLE-->
                             </div>
