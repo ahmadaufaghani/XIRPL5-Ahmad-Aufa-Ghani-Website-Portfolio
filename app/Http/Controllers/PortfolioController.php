@@ -37,12 +37,12 @@ class PortfolioController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        Portfolio::create([
+        $portfolio = Portfolio::create([
             'nama'      => $request->nama,
             'deskripsi' => $request->deskripsi,
             'gambar'    => $request->file('gambar')->getClientOriginalName(),
         ]);
-
+        $portfolio->save();
         $request->file('gambar')->move('admin/images/portfolio', $request->file('gambar')->getClientOriginalName());
         return redirect()->route('portfolio.index');
     }
